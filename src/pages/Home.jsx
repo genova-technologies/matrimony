@@ -13,17 +13,14 @@ const sliderContent = [
   {
     image: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1600&q=80',
     title: <>Trust Begins With<br />Verified Malayali<br />Profiles</>,
-    // description: 'Experience Matchmaking With Confidence Through Our Verified Malayali Profiles. Each Profile is Validated to Ensure Real, Reliable, and Serious Connections For Your Perfect Life Partner'
   },
   {
     image: 'https://images.unsplash.com/photo-1727430256509-0f897d6f4765?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDV8fHdlZGRkaW5nfGVufDB8fDB8fHww',
     title: <>Find Your Perfect<br />Match With<br />Complete Security</>,
-    // description: 'Browse through thousands of active, hand-screened profiles with advanced privacy controls and secure communication channels designed for your peace of mind.'
   },
   {
     image: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1600&q=80',
     title: <>Begin Your Happy<br />Lifelong Journey<br />With Us</>,
-    // description: 'Join a community built on authentic relationships, traditional values, and intelligent matchmaking algorithms tailored to your exact life preferences.'
   }
 ];
 
@@ -68,6 +65,8 @@ export default function Home() {
     navigate('/registration', {
       state: {
         name: formData.name,
+        phone: formData.phone,
+        age: formData.age,
         gender: gender === 'male' ? 'Male' : 'Female',
       }
     });
@@ -82,7 +81,6 @@ export default function Home() {
         <div className="hero-overlay"></div>
         <div className="hero-content-wrapper">
           
-          {/* Dynamic Hero Content that changes with the background */}
           <div className="hero-text-side">
             <h1>
               {sliderContent[currentSlide].title}
@@ -92,66 +90,67 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Styled Quick Registration Form */}
           <div className="hero-form-card">
             <div className="hero-form-header">
               <h3>Find Your Partner From <span className="highlight-text">2 Lakh+</span> Profiles</h3>
-              {/* <p>100% Free matrimonial services</p> */}
             </div>
-<form onSubmit={handleRegisterSubmit}>
-  <div className="hero-form-row">
-    <div className="hero-input-wrapper">
-      <input type="text" name="name" placeholder="Full Name" value={formData.name} onChange={handleFormChange} required />
-    </div>
-    <div className="phone-input-group">
-      <span className="country-code">🇮🇳 +91</span>
-      <input type="tel" name="phone" placeholder="Mobile Number" value={formData.phone} onChange={handleFormChange} required />
-    </div>
-  </div>
+            <form onSubmit={handleRegisterSubmit}>
+              <div className="hero-form-row">
+                <div className="hero-input-wrapper">
+                  <input type="text" name="name" placeholder="Full Name" value={formData.name} onChange={handleFormChange} required />
+                </div>
+                <div className="phone-input-group">
+                  <span className="country-code">🇮🇳 +91</span>
+                  <input type="tel" name="phone" placeholder="Mobile Number" value={formData.phone} onChange={handleFormChange} required />
+                </div>
+              </div>
 
-  <div className="hero-form-row">
-    <div
-      className={`gender-option ${gender === 'male' ? 'active' : ''}`}
-      onClick={() => setGender('male')}
-    >
-      <span>👤</span> Male
-    </div>
+              <div className="hero-form-row">
+                <div
+                  className={`gender-option ${gender === 'male' ? 'active' : ''}`}
+                  onClick={() => setGender('male')}
+                >
+                  <span>👤</span> Male
+                </div>
 
-    <div
-      className={`gender-option ${gender === 'female' ? 'active' : ''}`}
-      onClick={() => setGender('female')}
-    >
-      <span>👤</span> Female
-    </div>
+                <div
+                  className={`gender-option ${gender === 'female' ? 'active' : ''}`}
+                  onClick={() => setGender('female')}
+                >
+                  <span>👤</span> Female
+                </div>
 
-    <div className="hero-input-wrapper">
-      <select defaultValue="" required>
-        <option value="" disabled>Age</option>
-        <option value="20-25">20 - 25 Years</option>
-        <option value="25-30">25 - 30 Years</option>
-        <option value="30-35">30 - 35 Years</option>
-      </select>
-    </div>
-    
-  </div>
+                <div className="hero-input-wrapper">
+                  <input 
+                    type="number" 
+                    name="age" 
+                    placeholder="Age" 
+                    min="18" 
+                    max="60" 
+                    value={formData.age} 
+                    onChange={handleFormChange} 
+                    required 
+                  />
+                </div>
+              </div>
 
-  <div className="terms-row">
-    <input type="checkbox" id="terms" required />
-    <label htmlFor="terms">
-      I have read and agree to the <a href="#terms">Terms of Use</a> &{" "}
-      <a href="#privacy">Privacy Policy</a>
-    </label>
-  </div>
-    
-  <button type="submit" className="hero-register-btn" href="/register">
-    Register Free
-  </button>
+              <div className="terms-row">
+                <input type="checkbox" id="terms" required />
+                <label htmlFor="terms">
+                  I have read and agree to the <a href="#terms">Terms of Use</a> &{" "}
+                  <a href="#privacy">Privacy Policy</a>
+                </label>
+              </div>
+                
+              <button type="submit" className="hero-register-btn">
+                Register Free
+              </button>
 
-  <div className="hero-form-footer">
-    <span>🎧 Support</span>
-    <span>💬 Chat for assistance</span>
-  </div>
-</form>
+              <div className="hero-form-footer">
+                <span>🎧 Support</span>
+                <span>💬 Chat for assistance</span>
+              </div>
+            </form>
           </div>
         </div>
       </div>
@@ -160,7 +159,6 @@ export default function Home() {
         <h2 className="section-title1">Featured Matches</h2>
         <p className="section-subtitle">Handpicked potential profiles matching high compatibility standards</p>
         
-        {/* Filter Tabs */}
         <div className="featured-filter-tabs">
           <button 
             className={`filter-tab ${activeFilter === 'all' ? 'active' : ''}`}
@@ -206,7 +204,7 @@ export default function Home() {
       </div>
 
       <div className="features-section">
-        <h2 className="section-title" style={{ marginBottom: '1rem' }}>Why Choose KeralakaraMatrimony?</h2>
+        <h2 className="section-title3345" style={{ marginBottom: '1rem' }}>Why Choose KeralakaraMatrimony?</h2>
         <p className="section-subtitle">We guarantee security and trusted matches for a lifelong commitment.</p>
         
         <div className="features-grid">
@@ -224,45 +222,46 @@ export default function Home() {
           </div>
         </div>
       </div>
+      
       <div className="support-section">
-  <div className="support-item">
-    <Mail size={22} />
-    <div>
-      <h4>Support Request</h4>
-      <p>Raise a support ticket</p>
-    </div>
-  </div>
+        <div className="support-item">
+          <Mail size={22} />
+          <div>
+            <h4>Support Request</h4>
+            <p>Raise a support ticket</p>
+          </div>
+        </div>
 
-  <div className="support-item">
-    <MessageCircle size={22} />
-    <div>
-      <h4>Chat For Assistance</h4>
-      <p>We're here to help</p>
-    </div>
-  </div>
+        <div className="support-item">
+          <MessageCircle size={22} />
+          <div>
+            <h4>Chat For Assistance</h4>
+            <p>We're here to help</p>
+          </div>
+        </div>
 
-  <div className="support-item">
-    <Phone size={22} />
-    <div>
-      <h4>Call Us</h4>
-      <a href="tel:+917034776667">7034776667</a>
-    </div>
-  </div>
+        <div className="support-item">
+          <Phone size={22} />
+          <div>
+            <h4>Call Us</h4>
+            <a href="tel:+919000000000">9000000000</a>
+          </div>
+        </div>
 
-  <div className="support-item">
-    <MessageCircleMore size={22} />
-    <div>
-      <h4>WhatsApp</h4>
-      <a
-        href="https://wa.me/917034776667"
-        target="_blank"
-        rel="noreferrer"
-      >
-        7034776667
-      </a>
-    </div>
-  </div>
-</div>
+        <div className="support-item">
+          <MessageCircleMore size={22} />
+          <div>
+            <h4>WhatsApp</h4>
+            <a
+              href="https://wa.me/919000000000"
+              target="_blank"
+              rel="noreferrer"
+            >
+              9000000000
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   );
-}   
+}

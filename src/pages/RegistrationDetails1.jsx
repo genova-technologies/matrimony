@@ -1,8 +1,13 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./RegistrationDetails1.css";
 
-export default function RegistrationDetails() {
+export default function RegistrationDetails1() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const registration = location.state?.registration || null;
+
   const [formData, setFormData] = useState({
     educationLevel: "",
     education: "",
@@ -16,219 +21,291 @@ export default function RegistrationDetails() {
     disability: "No",
   });
 
-  const navigate = useNavigate();
-
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
-    navigate('/registration-details3');
+
+    if (!registration) {
+      alert("Registration data is missing. Please start again.");
+      navigate("/registration");
+      return;
+    }
+
+    if (
+      !formData.education ||
+      !formData.highestEducation ||
+      !formData.occupationLevel ||
+      !formData.occupation ||
+      !formData.annualIncome ||
+      !formData.workLocation ||
+      !formData.workingPlace ||
+      !formData.height
+    ) {
+      alert("Please fill all required fields.");
+      return;
+    }
+
+    const updatedRegistration = {
+      ...registration,
+
+      // Education
+      education_level: formData.educationLevel,
+      education: formData.education,
+      highest_education: formData.highestEducation,
+
+      // Occupation
+      occupation_level: formData.occupationLevel,
+      occupation: formData.occupation,
+      income: formData.annualIncome,
+      work_location: formData.workLocation,
+      working_place: formData.workingPlace,
+
+      // Other Details
+      height: formData.height,
+      disability: formData.disability,
+    };
+
+    console.log("Step 1 + Step 2 Data:", updatedRegistration);
+
+    navigate("/registration-details3", {
+      state: {
+        registration: updatedRegistration,
+      },
+    });
   };
 
   return (
     <>
       {/* Banner */}
-      <div className="details-banner">
-        <div className="details-banner-content">
-          <h1>Education & Occupation Details</h1>
-          <p>Tell us more about your background to find the best match.</p>
+      <section className="registration-banner">
+        <div className="banner-overlay">
+          <h1>Find Your Perfect Match</h1>
+          <p>
+            Join thousands of happy couples who found their life
+            partner through Matrimony.
+          </p>
         </div>
-      </div>
+      </section>
 
-      {/* Step Progress */}
+      {/* Step Bar */}
       <div className="reg-step-bar">
         <div className="reg-step-item">
-          <div className="reg-step-circle completed">✓</div>
+          <div className="reg-step-circle completed">1</div>
           <span className="reg-step-label">Basic Info</span>
         </div>
-        <div className="reg-step-line done"></div>
+
+        <div className="reg-step-line active"></div>
+
         <div className="reg-step-item">
           <div className="reg-step-circle active">2</div>
           <span className="reg-step-label">Education</span>
         </div>
+
         <div className="reg-step-line"></div>
+
         <div className="reg-step-item">
           <div className="reg-step-circle">3</div>
           <span className="reg-step-label">Family</span>
         </div>
       </div>
 
-      <div className="details-page">
-        <div className="details-container">
-        <form onSubmit={handleSubmit}>
+      {/* Registration Form */}
+      <div className="registration-page">
+        <div className="registration-container">
+          <form onSubmit={handleSubmit}>
 
-          <h2>Education Details</h2>
+            {/* Education Level */}
+            <div className="form-group">
+              <label>Education Level</label>
 
-          <div className="form-group">
-            <label>Education Level *</label>
-            <select
-              name="educationLevel"
-              value={formData.educationLevel}
-              onChange={handleChange}
-            >
-              <option>Select Highest Education Level</option>
-              <option>SSLC</option>
-              <option>Plus Two</option>
-              <option>Diploma</option>
-              <option>Degree</option>
-              <option>PG</option>
-            </select>
-          </div>
-
-          <div className="form-group">
-            <label>Education *</label>
-            <select
-              name="education"
-              value={formData.education}
-              onChange={handleChange}
-            >
-              <option>Select</option>
-              <option>B.Com</option>
-              <option>B.Sc</option>
-              <option>B.Tech</option>
-              <option>M.Com</option>
-              <option>MBA</option>
-            </select>
-          </div>
-
-          <div className="form-group">
-            <label>Highest Education *</label>
-            <textarea
-              rows="3"
-              name="highestEducation"
-              placeholder="Type highest education"
-              value={formData.highestEducation}
-              onChange={handleChange}
-            />
-          </div>
-
-          <hr />
-
-          <h2>Occupation Details</h2>
-
-          <div className="form-group">
-            <label>Occupation Level *</label>
-            <select
-              name="occupationLevel"
-              value={formData.occupationLevel}
-              onChange={handleChange}
-            >
-              <option>Select</option>
-              <option>Government</option>
-              <option>Private</option>
-              <option>Business</option>
-              <option>Self Employed</option>
-            </select>
-          </div>
-
-          <div className="form-group">
-            <label>Occupation *</label>
-            <textarea
-              rows="2"
-              name="occupation"
-              placeholder="Type Occupation"
-              value={formData.occupation}
-              onChange={handleChange}
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Annual Income *</label>
-            <select
-              name="annualIncome"
-              value={formData.annualIncome}
-              onChange={handleChange}
-            >
-              <option>Select</option>
-              <option>Below 2 Lakhs</option>
-              <option>2-5 Lakhs</option>
-              <option>5-10 Lakhs</option>
-              <option>Above 10 Lakhs</option>
-            </select>
-          </div>
-
-          <div className="form-group">
-            <label>Working District/State *</label>
-            <input
-              type="text"
-              name="workLocation"
-              placeholder="District / State / Country"
-              value={formData.workLocation}
-              onChange={handleChange}
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Working Place *</label>
-            <input
-              type="text"
-              name="workingPlace"
-              placeholder="Working Place"
-              value={formData.workingPlace}
-              onChange={handleChange}
-            />
-          </div>
-
-          <hr />
-
-          <h2>Physical Details</h2>
-
-          <div className="form-group">
-            <label>Height *</label>
-            <select
-              name="height"
-              value={formData.height}
-              onChange={handleChange}
-            >
-              <option>Select Height</option>
-              <option>5'0"</option>
-              <option>5'2"</option>
-              <option>5'4"</option>
-              <option>5'6"</option>
-              <option>5'8"</option>
-              <option>6'0"</option>
-            </select>
-          </div>
-
-          <div className="form-group">
-            <label>Physical Disability *</label>
-
-            <div className="radio-group">
-              <label>
-                <input
-                  type="radio"
-                  name="disability"
-                  value="Yes"
-                  checked={formData.disability === "Yes"}
-                  onChange={handleChange}
-                />
-                Yes
-              </label>
-
-              <label>
-                <input
-                  type="radio"
-                  name="disability"
-                  value="No"
-                  checked={formData.disability === "No"}
-                  onChange={handleChange}
-                />
-                No
-              </label>
+              <select
+                name="educationLevel"
+                value={formData.educationLevel}
+                onChange={handleChange}
+              >
+                <option value="">Select Education Level</option>
+                <option value="School">School</option>
+                <option value="Higher Secondary">Higher Secondary</option>
+                <option value="Diploma">Diploma</option>
+                <option value="Undergraduate">Undergraduate</option>
+                <option value="Postgraduate">Postgraduate</option>
+                <option value="Doctorate">Doctorate</option>
+                <option value="Other">Other</option>
+              </select>
             </div>
-          </div>
 
-          <button className="submit-btn">
-            COMPLETE REGISTRATION
-          </button>
+            {/* Education */}
+            <div className="form-group">
+              <label>Education *</label>
 
-        </form>
+              <input
+                type="text"
+                name="education"
+                placeholder="Enter Education"
+                value={formData.education}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            {/* Highest Education */}
+            <div className="form-group">
+              <label>Highest Education *</label>
+
+              <input
+                type="text"
+                name="highestEducation"
+                placeholder="Enter Highest Education"
+                value={formData.highestEducation}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            {/* Occupation Level */}
+            <div className="form-group">
+              <label>Occupation Level *</label>
+
+              <select
+                name="occupationLevel"
+                value={formData.occupationLevel}
+                onChange={handleChange}
+                required
+              >
+                <option value="">Select Occupation Level</option>
+                <option value="Student">Student</option>
+                <option value="Private">Private</option>
+                <option value="Government">Government</option>
+                <option value="Business">Business</option>
+                <option value="Self Employed">Self Employed</option>
+                <option value="Not Working">Not Working</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            {/* Occupation */}
+            <div className="form-group">
+              <label>Occupation *</label>
+
+              <input
+                type="text"
+                name="occupation"
+                placeholder="Enter Occupation"
+                value={formData.occupation}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            {/* Annual Income */}
+            <div className="form-group">
+              <label>Annual Income *</label>
+
+              <input
+                type="text"
+                name="annualIncome"
+                placeholder="Enter Annual Income"
+                value={formData.annualIncome}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            {/* Work Location */}
+            <div className="form-group">
+              <label>Work Location *</label>
+
+              <select
+                name="workLocation"
+                value={formData.workLocation}
+                onChange={handleChange}
+                required
+              >
+                <option value="">Select Work Location</option>
+                <option value="India">India</option>
+                <option value="UAE">UAE</option>
+                <option value="Saudi Arabia">Saudi Arabia</option>
+                <option value="Qatar">Qatar</option>
+                <option value="Kuwait">Kuwait</option>
+                <option value="Oman">Oman</option>
+                <option value="Bahrain">Bahrain</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            {/* Working Place */}
+            <div className="form-group">
+              <label>Working Place *</label>
+
+              <input
+                type="text"
+                name="workingPlace"
+                placeholder="Enter Working Place"
+                value={formData.workingPlace}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            {/* Height */}
+            <div className="form-group">
+              <label>Height *</label>
+
+              <input
+                type="text"
+                name="height"
+                placeholder="Example: 5'5&quot;"
+                value={formData.height}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            {/* Disability */}
+            <div className="form-group">
+              <label>Any Disability</label>
+
+              <select
+                name="disability"
+                value={formData.disability}
+                onChange={handleChange}
+              >
+                <option value="No">No</option>
+                <option value="Yes">Yes</option>
+              </select>
+            </div>
+
+            {/* Buttons */}
+            <div className="form-buttons">
+              <button
+                type="button"
+                className="back-btn"
+                onClick={() =>
+                  navigate("/registration", {
+                    state: {
+                      name: registration?.full_name || "",
+                      gender: registration?.gender || "",
+                    },
+                  })
+                }
+              >
+                BACK
+              </button>
+
+              <button type="submit" className="submit-btn">
+                NEXT
+              </button>
+            </div>
+
+          </form>
         </div>
       </div>
     </>
