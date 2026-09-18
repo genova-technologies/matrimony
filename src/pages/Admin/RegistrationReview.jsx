@@ -21,7 +21,7 @@ export default function RegistrationReview() {
       setLoading(true);
 
       const response = await fetch(
-        `http://127.0.0.1:8000/api/adminpanel/registrations/${id}/`,
+        `https://matrimonydjango.onrender.com/api/adminpanel/registrations/${id}/`,
         {
           method: "GET",
           headers: {
@@ -102,7 +102,7 @@ export default function RegistrationReview() {
     try {
       setActionLoading(true);
 
-      const url = `http://127.0.0.1:8000/api/adminpanel/registrations/${id}/${action}/`;
+      const url = `https://matrimonydjango.onrender.com/api/adminpanel/registrations/${id}/${action}/`;
 
       const body =
         action === "correction" || action === "reject"

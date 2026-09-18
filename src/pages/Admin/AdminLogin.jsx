@@ -16,7 +16,7 @@ const handleSubmit = async (e) => {
 
   try {
     const response = await fetch(
-      "http://127.0.0.1:8000/api/accounts/login/",
+      "https://matrimonydjango.onrender.com/api/accounts/login/",
       {
         method: "POST",
         headers: {
