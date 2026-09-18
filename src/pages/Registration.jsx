@@ -21,7 +21,9 @@ export default function Registration() {
     source: "",
   });
 
-  // Handle input changes
+  // =========================
+  // HANDLE INPUT CHANGE
+  // =========================
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -31,7 +33,9 @@ export default function Registration() {
     }));
   };
 
-  // Handle Step 1 submit
+  // =========================
+  // HANDLE SUBMIT
+  // =========================
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -50,18 +54,17 @@ export default function Registration() {
       Dec: "12",
     };
 
-    // Validate Date of Birth
+    // Validate DOB
     if (!formData.day || !formData.month || !formData.year) {
       alert("Please select your complete date of birth.");
       return;
     }
 
-    // Create YYYY-MM-DD format
     const dateOfBirth = `${formData.year}-${
       monthMap[formData.month]
     }-${String(formData.day).padStart(2, "0")}`;
 
-    // Prepare Step 1 data
+    // Registration data
     const registrationData = {
       full_name: formData.name.trim(),
       gender: formData.gender,
@@ -75,7 +78,7 @@ export default function Registration() {
 
     console.log("Step 1 Data:", registrationData);
 
-    // Move to Step 2
+    // Go to Step 2
     navigate("/registration-details", {
       state: {
         registration: registrationData,
@@ -83,10 +86,17 @@ export default function Registration() {
     });
   };
 
-  // Days
-  const days = Array.from({ length: 31 }, (_, i) => i + 1);
+  // =========================
+  // DAYS
+  // =========================
+  const days = Array.from(
+    { length: 31 },
+    (_, i) => i + 1
+  );
 
-  // Months
+  // =========================
+  // MONTHS
+  // =========================
   const months = [
     "Jan",
     "Feb",
@@ -102,7 +112,9 @@ export default function Registration() {
     "Dec",
   ];
 
-  // Years
+  // =========================
+  // YEARS
+  // =========================
   const years = [];
 
   for (let i = 1980; i <= 2010; i++) {
@@ -110,69 +122,93 @@ export default function Registration() {
   }
 
   return (
-    <>
+    <div className="registration-page-wrapper">
+
       {/* =========================
-          REGISTRATION BANNER
+          BANNER
       ========================= */}
       <section className="registration-banner">
-        <div className="banner-overlay">
-          <h1>Find Your Perfect Match</h1>
+
+        <div className="registration-banner-overlay">
+
+          <h1>
+            Find Your Perfect Match
+          </h1>
 
           <p>
-            Join thousands of happy couples who found their life
-            partner through Matrimony.
+            Join thousands of happy couples who found their
+            life partner through Matrimony.
           </p>
+
         </div>
+
       </section>
 
       {/* =========================
           STEP PROGRESS
       ========================= */}
-      <div className="reg-step-bar">
-        {/* Step 1 */}
-        <div className="reg-step-item">
-          <div className="reg-step-circle active">1</div>
+      <div className="registration-step-bar">
 
-          <span className="reg-step-label">
+        {/* STEP 1 */}
+        <div className="registration-step-item">
+
+          <div className="registration-step-circle active">
+            1
+          </div>
+
+          <span className="registration-step-label">
             Basic Info
           </span>
+
         </div>
 
-        <div className="reg-step-line"></div>
+        <div className="registration-step-line"></div>
 
-        {/* Step 2 */}
-        <div className="reg-step-item">
-          <div className="reg-step-circle">2</div>
+        {/* STEP 2 */}
+        <div className="registration-step-item">
 
-          <span className="reg-step-label">
+          <div className="registration-step-circle">
+            2
+          </div>
+
+          <span className="registration-step-label">
             Education
           </span>
+
         </div>
 
-        <div className="reg-step-line"></div>
+        <div className="registration-step-line"></div>
 
-        {/* Step 3 */}
-        <div className="reg-step-item">
-          <div className="reg-step-circle">3</div>
+        {/* STEP 3 */}
+        <div className="registration-step-item">
 
-          <span className="reg-step-label">
+          <div className="registration-step-circle">
+            3
+          </div>
+
+          <span className="registration-step-label">
             Family
           </span>
+
         </div>
+
       </div>
 
       {/* =========================
-          REGISTRATION FORM
+          FORM SECTION
       ========================= */}
-      <div className="registration-page">
-        <div className="registration-container">
+      <section className="registration-form-section">
+
+        <div className="registration-form-container">
+
           <form onSubmit={handleSubmit}>
 
-            {/* =========================
-                NAME
-            ========================= */}
-            <div className="form-group">
-              <label>Name of Bride/Groom *</label>
+            {/* NAME */}
+            <div className="registration-form-group">
+
+              <label>
+                Name of Bride/Groom *
+              </label>
 
               <input
                 type="text"
@@ -182,13 +218,15 @@ export default function Registration() {
                 onChange={handleChange}
                 required
               />
+
             </div>
 
-            {/* =========================
-                GENDER
-            ========================= */}
-            <div className="form-group">
-              <label>Gender *</label>
+            {/* GENDER */}
+            <div className="registration-form-group">
+
+              <label>
+                Gender *
+              </label>
 
               <select
                 name="gender"
@@ -196,6 +234,7 @@ export default function Registration() {
                 onChange={handleChange}
                 required
               >
+
                 <option value="">
                   Select Gender
                 </option>
@@ -207,24 +246,28 @@ export default function Registration() {
                 <option value="Female">
                   Female
                 </option>
+
               </select>
+
             </div>
 
-            {/* =========================
-                DATE OF BIRTH
-            ========================= */}
-            <div className="form-group">
-              <label>Date of Birth *</label>
+            {/* DATE OF BIRTH */}
+            <div className="registration-form-group">
 
-              <div className="dob">
+              <label>
+                Date of Birth *
+              </label>
 
-                {/* Day */}
+              <div className="registration-dob">
+
+                {/* DAY */}
                 <select
                   name="day"
                   value={formData.day}
                   onChange={handleChange}
                   required
                 >
+
                   <option value="">
                     Day
                   </option>
@@ -237,15 +280,17 @@ export default function Registration() {
                       {day}
                     </option>
                   ))}
+
                 </select>
 
-                {/* Month */}
+                {/* MONTH */}
                 <select
                   name="month"
                   value={formData.month}
                   onChange={handleChange}
                   required
                 >
+
                   <option value="">
                     Month
                   </option>
@@ -258,15 +303,17 @@ export default function Registration() {
                       {month}
                     </option>
                   ))}
+
                 </select>
 
-                {/* Year */}
+                {/* YEAR */}
                 <select
                   name="year"
                   value={formData.year}
                   onChange={handleChange}
                   required
                 >
+
                   <option value="">
                     Year
                   </option>
@@ -279,15 +326,16 @@ export default function Registration() {
                       {year}
                     </option>
                   ))}
+
                 </select>
 
               </div>
+
             </div>
 
-            {/* =========================
-                MARITAL STATUS
-            ========================= */}
-            <div className="form-group">
+            {/* MARITAL STATUS */}
+            <div className="registration-form-group">
+
               <label>
                 Marital Status *
               </label>
@@ -298,6 +346,7 @@ export default function Registration() {
                 onChange={handleChange}
                 required
               >
+
                 <option value="">
                   Select
                 </option>
@@ -313,13 +362,14 @@ export default function Registration() {
                 <option value="Widowed">
                   Widowed
                 </option>
+
               </select>
+
             </div>
 
-            {/* =========================
-                CASTE
-            ========================= */}
-            <div className="form-group">
+            {/* CASTE */}
+            <div className="registration-form-group">
+
               <label>
                 Caste *
               </label>
@@ -330,6 +380,7 @@ export default function Registration() {
                 onChange={handleChange}
                 required
               >
+
                 <option value="">
                   Select Caste
                 </option>
@@ -357,18 +408,22 @@ export default function Registration() {
                 <option value="Christian">
                   Christian
                 </option>
+
               </select>
+
             </div>
 
             {/* =========================
                 LOGIN DETAILS
             ========================= */}
-            <h2>
+
+            <h2 className="registration-section-title">
               For Matrimony Login
             </h2>
 
-            {/* Email */}
-            <div className="form-group">
+            {/* EMAIL */}
+            <div className="registration-form-group">
+
               <label>
                 User Email *
               </label>
@@ -381,10 +436,12 @@ export default function Registration() {
                 onChange={handleChange}
                 required
               />
+
             </div>
 
-            {/* Password */}
-            <div className="form-group">
+            {/* PASSWORD */}
+            <div className="registration-form-group">
+
               <label>
                 Password *
               </label>
@@ -397,16 +454,19 @@ export default function Registration() {
                 onChange={handleChange}
                 required
               />
+
             </div>
 
             {/* =========================
                 SOURCE
             ========================= */}
-            <h2>
+
+            <h2 className="registration-section-title">
               How did you know about Keralakaramatrimony?
             </h2>
 
-            <div className="form-group">
+            <div className="registration-form-group">
+
               <label>
                 Source *
               </label>
@@ -417,6 +477,7 @@ export default function Registration() {
                 onChange={handleChange}
                 required
               >
+
                 <option value="">
                   Select
                 </option>
@@ -440,22 +501,25 @@ export default function Registration() {
                 <option value="Advertisement">
                   Advertisement
                 </option>
+
               </select>
+
             </div>
 
-            {/* =========================
-                NEXT BUTTON
-            ========================= */}
+            {/* SUBMIT */}
             <button
               type="submit"
-              className="submit-btn"
+              className="registration-submit-btn"
             >
               ENTER
             </button>
 
           </form>
+
         </div>
-      </div>
-    </>
+
+      </section>
+
+    </div>
   );
 }

@@ -503,45 +503,6 @@ export default function ClientDashboard() {
 
               {/* PROFILE STATUS */}
 
-              <div className="overview-card">
-
-                <div className="overview-card-top">
-
-                  <div className="overview-icon status-icon">
-                    ✓
-                  </div>
-
-                  <span
-                    className={`small-status ${getStatusClass()}`}
-                  >
-                    {profile.status || "PENDING"}
-                  </span>
-
-                </div>
-
-                <h4>
-                  Profile Status
-                </h4>
-
-                <strong>
-                  {profile.status === "PUBLISHED"
-                    ? "Published"
-                    : profile.status === "APPROVED"
-                    ? "Approved"
-                    : profile.status === "UNDER_REVIEW"
-                    ? "Under Review"
-                    : profile.status === "CORRECTION_REQUIRED"
-                    ? "Correction"
-                    : profile.status === "REJECTED"
-                    ? "Rejected"
-                    : "Pending"}
-                </strong>
-
-                <p>
-                  {getStatusMessage()}
-                </p>
-
-              </div>
 
               {/* PROFILE COMPLETION */}
 
@@ -549,9 +510,9 @@ export default function ClientDashboard() {
 
                 <div className="overview-card-top">
 
-                  <div className="overview-icon completion-icon">
+                  {/* <div className="overview-icon completion-icon">
                     %
-                  </div>
+                  </div> */}
 
                   <span className="card-label">
                     Completion
@@ -590,9 +551,9 @@ export default function ClientDashboard() {
 
                 <div className="overview-card-top">
 
-                  <div className="overview-icon interest-icon">
+                  {/* <div className="overview-icon interest-icon">
                     ♡
-                  </div>
+                  </div> */}
 
                   <span className="card-label">
                     Activity
@@ -629,9 +590,9 @@ export default function ClientDashboard() {
 
                 <div className="overview-card-top">
 
-                  <div className="overview-icon shortlist-icon">
+                  {/* <div className="overview-icon shortlist-icon">
                     ☆
-                  </div>
+                  </div> */}
 
                   <span className="card-label">
                     Saved
@@ -659,6 +620,42 @@ export default function ClientDashboard() {
                 >
                   View Shortlist →
                 </button>
+
+              </div>
+                                <div className="overview-card">
+
+                <div className="overview-card-top">
+
+
+                  <span
+                    className={`small-status ${getStatusClass()}`}
+                  >
+                    {profile.status || "PENDING"}
+                  </span>
+
+                </div>
+
+                <h4>
+                  Profile Status
+                </h4>
+
+                <strong>
+                  {profile.status === "PUBLISHED"
+                    ? "Published"
+                    : profile.status === "APPROVED"
+                    ? "Approved"
+                    : profile.status === "UNDER_REVIEW"
+                    ? "Under Review"
+                    : profile.status === "CORRECTION_REQUIRED"
+                    ? "Correction"
+                    : profile.status === "REJECTED"
+                    ? "Rejected"
+                    : "Pending"}
+                </strong>
+
+                <p>
+                  {getStatusMessage()}
+                </p>
 
               </div>
 

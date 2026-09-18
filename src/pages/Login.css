@@ -1,219 +1,436 @@
-/* ===========================
+/* =========================================
    LOGIN PAGE
-=========================== */
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+========================================= */
 
 .login-page {
   min-height: 100vh;
+  width: 100%;
   background: #f2faf6;
   font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
 }
 
-/* ===========================
-   BANNER
-=========================== */
+.login-page *,
+.login-page *::before,
+.login-page *::after {
+  box-sizing: border-box;
+}
 
-.login-banner {
+
+/* =========================================
+   BANNER
+========================================= */
+
+.login-page .login-banner {
+  width: 100%;
   height: 320px;
-  background: linear-gradient(
+
+  background:
+    linear-gradient(
       rgba(255, 255, 255, 0.83),
       rgba(2, 69, 38, 0.55)
     ),
     url("https://images.unsplash.com/photo-1560145725-18e738a9a336?auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8d2VkZGRpbmclMjBiYWNrZ3JvdW5kfGVufDB8fDB8fHww")
-      center/cover no-repeat;
+      center / cover no-repeat;
+
   display: flex;
   justify-content: center;
   align-items: center;
+
   text-align: center;
 }
 
-.login-banner-overlay {
+.login-page .login-banner-overlay {
+  width: 100%;
   padding: 20px;
-  color: #fff;
+  color: #ffffff;
 }
 
-.login-banner-overlay h1 {
+.login-page .login-banner-overlay h1 {
+  margin: 0 0 15px;
+
+  color: #ffffff;
+
   font-size: 42px;
   font-weight: 700;
-  margin-bottom: 15px;
+
+  line-height: 1.25;
 }
 
-.login-banner-overlay p {
+.login-page .login-banner-overlay p {
   max-width: 650px;
-  margin: auto;
+
+  margin: 0 auto;
+
+  color: #ffffff;
+
   font-size: 18px;
   line-height: 1.8;
+
   opacity: 0.95;
 }
 
-/* ===========================
-   LOGIN CARD
-=========================== */
 
-.login-card {
-  width: 100%;
+/* =========================================
+   LOGIN CARD
+========================================= */
+
+.login-page .login-card {
+  width: calc(100% - 30px);
   max-width: 470px;
+
   margin: -70px auto 60px;
-  background: #fff;
+
   padding: 40px;
+
+  background: #ffffff;
+
   border-radius: 18px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.12);
+
   position: relative;
   z-index: 5;
 }
 
-.login-header {
-  text-align: center;
+
+/* =========================================
+   LOGIN HEADER
+========================================= */
+
+.login-page .login-header {
+  width: 100%;
+
   margin-bottom: 30px;
+
+  text-align: center;
 }
 
-.login-header h2 {
+.login-page .login-header h2 {
+  margin: 0 0 10px;
+
   color: #00ab5b;
+
   font-size: 32px;
-  margin-bottom: 10px;
+  font-weight: 700;
+
+  line-height: 1.3;
 }
 
-.login-header p {
-  color: #666;
+.login-page .login-header p {
+  margin: 0;
+
+  color: #666666;
+
   font-size: 15px;
 }
 
-/* ===========================
-   FORM
-=========================== */
 
-.form-group {
+/* =========================================
+   LOGIN FORM
+========================================= */
+
+.login-page .login-form-group {
+  width: 100%;
+
   margin-bottom: 22px;
 }
 
-.form-group label {
+.login-page .login-form-group label {
   display: block;
+
   margin-bottom: 8px;
+
+  color: #444444;
+
   font-size: 15px;
   font-weight: 600;
-  color: #444;
 }
 
-.form-group input {
+.login-page .login-form-group input {
+  display: block;
+
   width: 100%;
   height: 52px;
+
   padding: 0 16px;
-  border: 1px solid #ddd;
+
+  border: 1px solid #dddddd;
   border-radius: 10px;
+
+  background: #ffffff;
+
+  color: #333333;
+
+  font-family: "Poppins", sans-serif;
   font-size: 15px;
-  transition: 0.3s;
-  background: #fff;
-}
 
-.form-group input:focus {
   outline: none;
-  border-color: #00ab5b;
-  box-shadow: 0 0 0 4px rgba(0, 171, 91, 0.12);
+
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
-/* ===========================
-   BUTTON
-=========================== */
+.login-page .login-form-group input::placeholder {
+  color: #999999;
+}
 
-.submit-btn {
+.login-page .login-form-group input:focus {
+  border-color: #00ab5b;
+
+  box-shadow:
+    0 0 0 4px rgba(0, 171, 91, 0.12);
+}
+
+
+/* =========================================
+   LOGIN BUTTON
+========================================= */
+
+.login-page .login-submit-btn {
+  display: block;
+
   width: 100%;
   height: 52px;
+
+  padding: 0 20px;
+
   border: none;
   border-radius: 10px;
-  background: linear-gradient(135deg, #00ab5b, #00cc6d);
-  color: #fff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #00ab5b,
+      #00cc6d
+    );
+
+  color: #ffffff;
+
+  font-family: "Poppins", sans-serif;
+
   font-size: 17px;
   font-weight: 600;
+
   cursor: pointer;
-  transition: 0.3s;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    opacity 0.3s ease;
 }
 
-.submit-btn:hover {
+.login-page .login-submit-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(0, 171, 91, 0.3);
+
+  box-shadow:
+    0 10px 20px rgba(0, 171, 91, 0.3);
 }
 
-/* ===========================
-   LINKS
-=========================== */
+.login-page .login-submit-btn:active {
+  transform: translateY(0);
+}
 
-.login-links {
+.login-page .login-submit-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+
+/* =========================================
+   LOGIN LINKS
+========================================= */
+
+.login-page .login-links {
+  width: 100%;
+
   display: flex;
+
   justify-content: space-between;
   align-items: center;
+
+  gap: 15px;
+
   margin-top: 18px;
 }
 
-.login-links a {
+
+/* Forgot Password */
+
+.login-page .login-forgot-btn {
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+
   color: #00ab5b;
-  text-decoration: none;
+
+  font-family: "Poppins", sans-serif;
+
   font-size: 14px;
   font-weight: 500;
-  transition: 0.3s;
+
+  cursor: pointer;
+
+  transition:
+    color 0.3s ease;
 }
 
-.login-links a:hover {
+.login-page .login-forgot-btn:hover {
   color: #008244;
+
   text-decoration: underline;
 }
 
-/* ===========================
-   RESPONSIVE
-=========================== */
+
+/* Create Account */
+
+.login-page .login-create-btn {
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+
+  color: #00ab5b;
+
+  font-family: "Poppins", sans-serif;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition:
+    color 0.3s ease;
+}
+
+.login-page .login-create-btn:hover {
+  color: #008244;
+
+  text-decoration: underline;
+}
+
+
+/* =========================================
+   RESPONSIVE - TABLET
+========================================= */
 
 @media (max-width: 768px) {
-  .login-banner {
+
+  .login-page .login-banner {
     height: 240px;
   }
 
-  .login-banner-overlay h1 {
+  .login-page .login-banner-overlay {
+    padding: 20px;
+  }
+
+  .login-page .login-banner-overlay h1 {
     font-size: 30px;
   }
 
-  .login-banner-overlay p {
+  .login-page .login-banner-overlay p {
     font-size: 15px;
+    line-height: 1.6;
     padding: 0 10px;
   }
 
-  .login-card {
-    margin: -45px 20px 40px;
+  .login-page .login-card {
+    width: calc(100% - 40px);
+
+    margin: -45px auto 40px;
+
     padding: 30px 24px;
   }
 
-  .login-header h2 {
+  .login-page .login-header h2 {
     font-size: 26px;
   }
 
-  .login-links {
+  .login-page .login-links {
     flex-direction: column;
+
+    justify-content: center;
+
     gap: 10px;
   }
 }
 
+
+/* =========================================
+   RESPONSIVE - MOBILE
+========================================= */
+
 @media (max-width: 480px) {
-  .login-banner {
+
+  .login-page .login-banner {
     height: 200px;
   }
 
-  .login-banner-overlay h1 {
+  .login-page .login-banner-overlay {
+    padding: 15px;
+  }
+
+  .login-page .login-banner-overlay h1 {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+
+  .login-page .login-banner-overlay p {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .login-page .login-card {
+    width: calc(100% - 24px);
+
+    margin: -30px auto 30px;
+
+    padding: 25px 20px;
+
+    border-radius: 15px;
+  }
+
+  .login-page .login-header {
+    margin-bottom: 25px;
+  }
+
+  .login-page .login-header h2 {
     font-size: 24px;
   }
 
-  .login-banner-overlay p {
+  .login-page .login-header p {
     font-size: 14px;
   }
 
-  .login-card {
-    padding: 25px 20px;
+  .login-page .login-form-group {
+    margin-bottom: 18px;
   }
 
-  .form-group input,
-  .submit-btn {
+  .login-page .login-form-group input,
+  .login-page .login-submit-btn {
     height: 48px;
+  }
+
+  .login-page .login-form-group label {
+    font-size: 14px;
+  }
+
+  .login-page .login-form-group input {
+    font-size: 14px;
+  }
+
+  .login-page .login-submit-btn {
+    font-size: 16px;
+  }
+
+  .login-page .login-links {
+    margin-top: 16px;
   }
 }

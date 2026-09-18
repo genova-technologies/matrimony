@@ -33,26 +33,16 @@ export default function Login() {
 
       console.log("Login response:", data);
 
-      // ==========================================
-      // LOGIN FAILED
-      // ==========================================
       if (!response.ok) {
         alert(data.detail || "Invalid email or password");
         return;
       }
 
-      // ==========================================
-      // SAVE LOGIN DATA
-      // ==========================================
       localStorage.setItem("access_token", data.access);
       localStorage.setItem("refresh_token", data.refresh);
       localStorage.setItem("user", JSON.stringify(data.user));
 
       alert("Login successful!");
-
-      // ==========================================
-      // REDIRECT BASED ON ROLE
-      // ==========================================
 
       if (data.user.role === "CLIENT") {
         navigate("/dashboard");
@@ -63,7 +53,6 @@ export default function Login() {
       } else {
         navigate("/");
       }
-
     } catch (error) {
       console.error("Login error:", error);
       alert("Unable to connect to backend server.");
@@ -75,9 +64,7 @@ export default function Login() {
   return (
     <div className="login-page">
 
-      {/* ================================
-          BANNER
-      ================================= */}
+      {/* Banner */}
       <section className="login-banner">
         <div className="login-banner-overlay">
           <h1>Find Your Perfect Life Partner</h1>
@@ -89,9 +76,7 @@ export default function Login() {
         </div>
       </section>
 
-      {/* ================================
-          LOGIN CARD
-      ================================= */}
+      {/* Login Card */}
       <div className="login-card">
 
         <div className="login-header">
@@ -102,10 +87,11 @@ export default function Login() {
         <form onSubmit={handleLogin}>
 
           {/* Email */}
-          <div className="form-group">
-            <label>Email</label>
+          <div className="login-form-group">
+            <label htmlFor="login-email">Email</label>
 
             <input
+              id="login-email"
               type="email"
               placeholder="Enter your registered email"
               value={email}
@@ -115,10 +101,11 @@ export default function Login() {
           </div>
 
           {/* Password */}
-          <div className="form-group">
-            <label>Password</label>
+          <div className="login-form-group">
+            <label htmlFor="login-password">Password</label>
 
             <input
+              id="login-password"
               type="password"
               placeholder="Enter your password"
               value={password}
@@ -130,7 +117,7 @@ export default function Login() {
           {/* Login Button */}
           <button
             type="submit"
-            className="submit-btn"
+            className="login-submit-btn"
             disabled={loading}
           >
             {loading ? "Logging in..." : "Login"}
@@ -138,19 +125,24 @@ export default function Login() {
 
           {/* Links */}
           <div className="login-links">
-
-            <a href="#">
+            <button
+              type="button"
+              className="login-forgot-btn"
+              onClick={() => alert("Forgot password feature coming soon.")}
+            >
               Forgot Password?
-            </a>
+            </button>
 
-            <a href="/registration">
+            <button
+              type="button"
+              className="login-create-btn"
+              onClick={() => navigate("/registration")}
+            >
               Create Account
-            </a>
-
+            </button>
           </div>
 
         </form>
-
       </div>
     </div>
   );
